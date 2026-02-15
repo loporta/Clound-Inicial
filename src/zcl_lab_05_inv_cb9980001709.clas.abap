@@ -12,6 +12,8 @@ ENDCLASS.
 
 
 CLASS zcl_lab_05_inv_cb9980001709 IMPLEMENTATION.
+
+
   METHOD if_oo_adt_classrun~main.
 
     "Concatenación
@@ -107,7 +109,72 @@ CLASS zcl_lab_05_inv_cb9980001709 IMPLEMENTATION.
     DATA(lv_reverse) = reverse( mv_translate_invoice ).
     out->write( lv_reverse ).
 
+    "OVERLAY
+    DATA: lv_sale        TYPE string VALUE 'Purchase Completed',
+          lv_sale_status TYPE string VALUE 'Invoice'.
+
+    OVERLAY lv_sale WITH lv_sale_status.
+
+    "Función SUBSTRING.
+    DATA: lv_result TYPE string VALUE 'SAP-ABAP-32-PE'.
+
+    out->write( lv_result ).
+    lv_result = substring( val = lv_result off = 4 len = 4  ).
+    out->write( lv_result ).
+
+    "FIND
+    DATA: lv_status TYPE string VALUE 'INVOICE GENERATED SUCCESSFULLY',
+          lv_count  TYPE i.
+
+    out->write( | { find_any_of( val = lv_status sub = 'GEN' ) } | ).
+
+    lv_count =  count( val = lv_status sub = 'A' ).
+    out->write( lv_count  ).
+
+
+    "REPLACE
+    DATA: lv_request TYPE string VALUE 'SAP-ABAP-32-PE'.
+
+    REPLACE ALL OCCURRENCES OF '-' IN lv_request WITH '/'.
+
+    "PCRE Regex
+    DATA: lv_regex TYPE string VALUE  '^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$',
+          lv_email TYPE string VALUE 'abc@dede.com.ar'.
+
+    FIND PCRE lv_regex IN lv_email.
+    IF sy-subrc = 0.
+      out->write( 'Formato correcto' ).
+    ELSE.
+      out->write( 'Formato incorrecto'  ).
+    ENDIF.
+
+    "Expresiones regulares
+    DATA: lv_idcustome TYPE string VALUE '0000012345'.
+
+    lv_regex = '0*'.
+
+    REPLACE ALL OCCURRENCES OF PCRE lv_Regex IN lv_idcustome WITH ' '.
+
+    out->write( lv_idcustome  ).
+
+    "Repetición de strings
+    out->write( | {  repeat( val = lv_idcustome occ = 3 ) } | ).
+
+
+    "Función ESCAPE
+
+    DATA: lv_format TYPE string VALUE 'Send payment data via Internet'.
+
+    DATA(lv_url) = escape( val = lv_format format = cl_abap_format=>e_html_text ).
+    out->write( lv_url  ).
+
+    DATA(lv_json) = escape( val = lv_format format = cl_abap_format=>e_json_string ).
+    out->write( lv_json  ).
+
+    DATA(lv_templ) = escape( val = lv_format format = cl_abap_format=>e_string_tpl ).
+    out->write( lv_templ  ).
+
+
 
   ENDMETHOD.
-
 ENDCLASS.

@@ -12,7 +12,9 @@ ENDCLASS.
 
 
 
-CLASS zcl_lab_04_cb9980001709 IMPLEMENTATION.
+CLASS ZCL_LAB_04_CB9980001709 IMPLEMENTATION.
+
+
   METHOD if_oo_adt_classrun~main.
 
     "Símbolos de texto.
@@ -63,5 +65,4 @@ CLASS zcl_lab_04_cb9980001709 IMPLEMENTATION.
       out->write( 'No lo contiene' ).
     ENDIF.
   ENDMETHOD.
-
 ENDCLASS.

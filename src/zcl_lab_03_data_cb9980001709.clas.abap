@@ -11,7 +11,9 @@ ENDCLASS.
 
 
 
-CLASS zcl_lab_03_data_cb9980001709 IMPLEMENTATION.
+CLASS ZCL_LAB_03_DATA_CB9980001709 IMPLEMENTATION.
+
+
   METHOD if_oo_adt_classrun~main.
 
     "Conversiones de Tipo
@@ -76,5 +78,4 @@ CLASS zcl_lab_03_data_cb9980001709 IMPLEMENTATION.
     DATA(mv_date_2f) = utclong_diff( high = mv_date_1_l low = mv_date_2_l ).
 
   ENDMETHOD.
-
 ENDCLASS.

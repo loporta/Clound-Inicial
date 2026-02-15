@@ -11,7 +11,9 @@ ENDCLASS.
 
 
 
-CLASS zcl_lab_02_arithcb9980001709 IMPLEMENTATION.
+CLASS ZCL_LAB_02_ARITHCB9980001709 IMPLEMENTATION.
+
+
   METHOD if_oo_adt_classrun~main.
 
     "Suma
@@ -88,5 +90,4 @@ CLASS zcl_lab_02_arithcb9980001709 IMPLEMENTATION.
     out->write( | { lv_square_root } | ).
 
   ENDMETHOD.
-
 ENDCLASS.
