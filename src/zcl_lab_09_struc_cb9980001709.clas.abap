@@ -63,7 +63,10 @@ CLASS zcl_lab_09_struc_cb9980001709 IMPLEMENTATION.
 
 
     "Estructura INCLUDE
-
+    TYPES: BEGIN OF ty_areo.
+             INCLUDE TYPE ty_flights AS flights.
+             INCLUDE TYPE ty_airlines AS airlines.
+  TYPES END OF ty_Areo.
 
     "Eliminar datos.
     CLEAR: ty_nested, ty_deep.
