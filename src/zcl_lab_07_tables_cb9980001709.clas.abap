@@ -131,6 +131,35 @@ CLASS zcl_lab_07_tables_cb9980001709 IMPLEMENTATION.
     ENDIF.
 
 
+    "FOR
+    TYPES: BEGIN OF ty_flights,
+             iduser     TYPE c LENGTH 40,
+             aircode    TYPE /dmo/carrier_id,
+             flightnum  TYPE /dmo/connection_id,
+             key        TYPE land1,
+             seat       TYPE /dmo/plane_seats_occupied,
+             flightdate TYPE /dmo/flight_date,
+           END OF ty_FLIGHTS.
+
+    DATA: lt_flights      TYPE STANDARD TABLE OF ty_FLIGHTS,
+          lt_flights_info TYPE STANDARD TABLE OF ty_FLIGHTS.
+
+    lt_flights = VALUE #( FOR i = 0 UNTIL i < 15
+                  ( iduser    = 1234 + i
+                     aircode   = 'SQ'
+                     flightnum = 0000 + i
+                     key       = 'US'
+                     seat      = 0 + i
+                     flightdate = cl_abap_context_info=>get_system_date( ) + i ) ).
+
+    lt_flights_info = VALUE #( FOR lw_flights IN lt_flights
+                               ( iduser     = lw_flights-iduser
+                                 aircode    = 'CL'
+                                 flightnum  = lw_flights-flightnum + 10
+                                 key        = 'COP'
+                                 seat       = lw_flights-seat
+                                 flightdate =  lw_flights-flightdate  ) ).
+
   ENDMETHOD.
 
 ENDCLASS.
